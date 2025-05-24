@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animation 1</title>
+    <style>
+        .box{
+            background-color: red;
+            color: brown;
+            padding: 2rem;
+            margin: 100vh;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1.8s ease-in-out;
+        }
+
+        .visible{
+            opacity: 1;
+            transform: translateY(0px);
+        }
+    </style>
+</head>
+<body>
+    <div id="fadeBox" class="box">Hier bin ich</div>
+    
+    <script>
+        const box = document.getElementById("fadeBox")
+        
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting){
+                    box.classList.add("visible")
+                    observer.unobserve(entry.target)
+                }
+            })
+        })
+        observer.observe(box)
+    </script>
+</body>
+</html>

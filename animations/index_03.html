@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        .space{
+            height: 100vh;
+        }
+        #lottieContainer{
+            width: 300px;
+            height: 300px;
+        }
+    </style>
+</head>
+<body>
+    <div class="space"></div>
+    <div id="lottieContainer"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js" integrity="sha512-jEnuDt6jfecCjthQAJ+ed0MTVA++5ZKmlUcmDGBv2vUI/REn6FuIdixLNnQT+vKusE2hhTk2is3cFvv5wA+Sgg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        const container = document.getElementById("lottieContainer")
+        const animation = lottie.loadAnimation({
+            container: container,
+            renderer: 'svg',
+            loop: true,
+            autoplay: true,
+            path: 'https://assets9.lottiefiles.com/packages/lf20_u4yrau.json'
+        })
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting){
+                    animation.play()
+                    observer.unobserve(container)
+                }
+            })
+        },
+        {
+            threshold: 0.5
+        }
+    )
+        observer.observe(container)
+    </script>
+</body>
+</html>
